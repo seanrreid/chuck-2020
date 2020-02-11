@@ -5,13 +5,16 @@ let category = 'dev';
 const refreshQuoteButton = document.querySelector('#refreshQuote');
 const submitFormButton = document.querySelector('#submitForm');
 const categoryChangeForm = document.querySelector('#categoryChangeForm');
+const closeModalButton = document.querySelector('#closeModal');
 
 function getQuote(category) {
   const apiUrl = `https://api.chucknorris.io/jokes/random?category=${category}`;
   const chuckSaysParagraph = document.querySelector('#chuckSays');
+  const modalWindow = document.querySelector('.modal-overlay');
 
   get(apiUrl).then(function(response) {
     chuckSaysParagraph.innerHTML = response.value;
+    modalWindow.classList.toggle('open');
   });
 }
 
@@ -49,6 +52,11 @@ submitFormButton.addEventListener('click', function(e) {
 
   category = categoryInput.value;
   getQuote(category);
+});
+
+closeModalButton.addEventListener('click', function(e) {
+  const modalWindow = document.querySelector('.modal-overlay');
+  modalWindow.classList.toggle('open');
 });
 
 getQuote(category);
