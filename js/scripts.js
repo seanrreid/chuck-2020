@@ -18,27 +18,23 @@ function getQuote(category) {
   });
 }
 
-function getCategories() {
+async function getCategories() {
   const apiUrl = `https://api.chucknorris.io/jokes/categories`;
-  const categorySelectLabel = document.querySelector('#categorySelectLabel');
+  const categories = await getWithAwait(apiUrl);
+  createCategorySelect(categories);
+}
 
-  get(apiUrl).then(function(response) {
-    const categoryList = response.filter(function(category) {
-      if (category != 'explicit') {
-        return category;
-      }
-    });
-    // Create a select element for our categories
-    const categoryElement = document.createElement('select');
-    // Create the options for the select element
-    categoryList.map(function(category) {
-      const categoryOption = document.createElement('option');
-      categoryOption.value = category;
-      categoryOption.text = category;
-      categoryElement.append(categoryOption);
-    });
-    categorySelectLabel.appendChild(categoryElement);
+function createCategorySelect(categories) {
+  const categorySelectLabel = document.querySelector('#categorySelectLabel');
+  const categoryElement = document.createElement('select');
+
+  categories.map(function(category) {
+    const categoryOption = document.createElement('option');
+    categoryOption.value = category;
+    categoryOption.text = category;
+    categoryElement.append(categoryOption);
   });
+  categorySelectLabel.appendChild(categoryElement);
 }
 
 refreshQuoteButton.addEventListener('click', function(e) {
