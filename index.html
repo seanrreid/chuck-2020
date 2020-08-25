@@ -9,8 +9,11 @@
     <p id="chuckSays">Chucks says...</p>
     <button type="button" id="refreshQuote">Refresh Quote</button>
     <form>
-        <input type="hidden" value="animal" id="categoryInput"/>
-        <button type="submit" id="submitForm">Get an Animal Quote</button>
+        <label>
+            Choose a Category
+            <input type="text" value="" id="categoryInput" name="categoryInput" required placeholder="Current Category: Dev" />
+        </label>
+        <button type="submit" id="submitForm">Get a Quote</button>
     </form>
 </body>
 <script src="js/get.js"></script>
